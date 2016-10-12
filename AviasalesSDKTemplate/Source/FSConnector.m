@@ -25,11 +25,14 @@
 
 
 @end
+@implementation FSItem
+
+@end
 
 @implementation FSConnector{
     
     
-    NSMutableArray <NSDictionary *> *dataArray;
+    NSMutableArray <FSItem *> *dataArray;
 }
 
 
@@ -37,24 +40,25 @@
     
     dataArray = [NSMutableArray array];
     
-    for(int i= 0;places.count;i++){
+    for(int i= 0;i<places.count;i++){
     
         
         
-        NSString *requestUrlString = [NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/explore?client_id=%@&client_secret=%@&v=20130815&ll=%1.2f,%1.2f&limit20",
+        NSString *requestUrlString = [NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/explore?client_id=%@&client_secret=%@&v=20130815&ll=%1.2f,%1.2f&limit=10&venuePhotos=1",
                                        FSClientId, FSClientSecret, places[i].latitude, places[i].longitude];
         
         NSURL *url = [NSURL URLWithString: requestUrlString];
         
         NSURLSession *session = [NSURLSession sharedSession];
-        [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSURLSessionDataTask *task =  [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             [self handleResponseData:data];
         }];
+        [task resume];
     }
 }
 
 - (void) handleResponseData: (NSData *) data{
-    dispatch_async(dispatch_queue_create("FSParseData", nil), ^{
+    dispatch_async(dispatch_queue_create("q1", nil), ^{
         NSError *error;
         NSDictionary *root = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         NSDictionary *response = root[@"response"];
@@ -64,9 +68,50 @@
         
         
         for(int i=0;i<items.count;i++){
-            NSDictionary *venue = items[i][@"venue"];
+            FSItem *item = [[FSItem alloc] init];
             
-            [dataArray addObject:venue];
+            NSDictionary *venue = items[i][@"venue"];
+            item.itemName = venue[@"name"];
+            
+            
+            NSDictionary *category = venue[@"categories"][0];
+            item.categoryName = category[@"pluralName"];
+            NSDictionary *photos = venue[@"photos"];
+            NSArray *tips = items[i][@"tips"];
+            if(tips.count > 0){
+                NSDictionary *tip = tips[0];
+                item.venueUrl = tip[@"canonicalUrl"];
+            }
+            [dataArray addObject:item];
+            
+            if([photos[@"count"] intValue]> 0){
+            
+                NSArray *photoGroups = photos[@"groups"];
+                NSDictionary *photoGroup = photoGroups[0];
+                NSArray *photoItems = photoGroup[@"items"];
+                NSDictionary *photoItem = photoItems[0];
+                
+                
+            
+                NSString *imageUrlPrefix = photoItem[@"prefix"];
+                NSString *imageUrlPostfix = photoItem[@"suffix"];
+                NSString *imageUrl = [NSString stringWithFormat:@"%@90x108%@",imageUrlPrefix, imageUrlPostfix];
+                
+                item.imagePath = imageUrl;
+                NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:imageUrl] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                    item.imageData = data;
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [_delegate FSConnectorDidReciveData:dataArray];
+                    });
+                    
+                }];
+                
+                [task resume];
+                
+            }
+            
+            
+            
         }
         
         

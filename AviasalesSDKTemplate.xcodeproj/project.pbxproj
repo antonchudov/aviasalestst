@@ -221,6 +221,8 @@
 		C974090C1DACE181004A0B89 /* FSConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = C974090B1DACE181004A0B89 /* FSConnector.m */; };
 		C97409181DAE25CE004A0B89 /* FSCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C97409161DAE25CE004A0B89 /* FSCollectionViewCell.m */; };
 		C97409191DAE25CE004A0B89 /* FSCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C97409171DAE25CE004A0B89 /* FSCollectionViewCell.xib */; };
+		C974091D1DAEC364004A0B89 /* FSVenueWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C974091B1DAEC364004A0B89 /* FSVenueWebViewVC.m */; };
+		C974091E1DAEC364004A0B89 /* FSVenueWebViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C974091C1DAEC364004A0B89 /* FSVenueWebViewVC.xib */; };
 		CFA1072F530A2EBCC2C123A6 /* libPods-AviasalesSDKTemplateTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6512EB8E2138DCDDAF0D230 /* libPods-AviasalesSDKTemplateTests.a */; };
 /* End PBXBuildFile section */
 
@@ -605,6 +607,9 @@
 		C97409151DAE25CE004A0B89 /* FSCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCollectionViewCell.h; sourceTree = "<group>"; };
 		C97409161DAE25CE004A0B89 /* FSCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCollectionViewCell.m; sourceTree = "<group>"; };
 		C97409171DAE25CE004A0B89 /* FSCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSCollectionViewCell.xib; sourceTree = "<group>"; };
+		C974091A1DAEC364004A0B89 /* FSVenueWebViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSVenueWebViewVC.h; sourceTree = "<group>"; };
+		C974091B1DAEC364004A0B89 /* FSVenueWebViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSVenueWebViewVC.m; sourceTree = "<group>"; };
+		C974091C1DAEC364004A0B89 /* FSVenueWebViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSVenueWebViewVC.xib; sourceTree = "<group>"; };
 		D857DB3BB9A6C7C0254EDC3C /* Pods-AviasalesSDKTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AviasalesSDKTemplate.release.xcconfig"; path = "Pods/Target Support Files/Pods-AviasalesSDKTemplate/Pods-AviasalesSDKTemplate.release.xcconfig"; sourceTree = "<group>"; };
 		D9E35EAEF225DD040D60E1D2 /* Pods-AviasalesSDKTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AviasalesSDKTemplate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AviasalesSDKTemplate/Pods-AviasalesSDKTemplate.debug.xcconfig"; sourceTree = "<group>"; };
 		E6512EB8E2138DCDDAF0D230 /* libPods-AviasalesSDKTemplateTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AviasalesSDKTemplateTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1608,6 +1613,9 @@
 				C97409151DAE25CE004A0B89 /* FSCollectionViewCell.h */,
 				C97409161DAE25CE004A0B89 /* FSCollectionViewCell.m */,
 				C97409171DAE25CE004A0B89 /* FSCollectionViewCell.xib */,
+				C974091A1DAEC364004A0B89 /* FSVenueWebViewVC.h */,
+				C974091B1DAEC364004A0B89 /* FSVenueWebViewVC.m */,
+				C974091C1DAEC364004A0B89 /* FSVenueWebViewVC.xib */,
 			);
 			name = FS;
 			sourceTree = "<group>";
@@ -1770,6 +1778,7 @@
 				7CCC2DC61D3D06280082FEFE /* JRResultsTicketPriceCell.xib in Resources */,
 				075989871D86C19000326FE2 /* vg_cta.png in Resources */,
 				7CCC2DC21D3D06280082FEFE /* JRResultsFlightSegmentCell.xib in Resources */,
+				C974091E1DAEC364004A0B89 /* FSVenueWebViewVC.xib in Resources */,
 				C580DB711CC52D6E009CA04B /* JRSearchFormDatesCell.xib in Resources */,
 				7CDA75B41D143FE90069FDD8 /* JRBrowserVC.xib in Resources */,
 				7C35F15C1D1A972C00B9CB09 /* JRFilterCellWithOneThumbSlider.xib in Resources */,
@@ -1932,6 +1941,7 @@
 				7C35F1571D1A972C00B9CB09 /* JRFilter.m in Sources */,
 				7C35F16D1D1A972C00B9CB09 /* JRFilterListSeparatorItem.m in Sources */,
 				077B71DA1D4A384200BB89BC /* JRSearchResultsFlightSegmentCellLayoutParameters.m in Sources */,
+				C974091D1DAEC364004A0B89 /* FSVenueWebViewVC.m in Sources */,
 				C580DB221CC52BC6009CA04B /* JRSearchInfo.m in Sources */,
 				7CE545E71D11BC340040065D /* JRInfoPanelView.m in Sources */,
 				7C35F15B1D1A972C00B9CB09 /* JRFilterCellWithOneThumbSlider.m in Sources */,

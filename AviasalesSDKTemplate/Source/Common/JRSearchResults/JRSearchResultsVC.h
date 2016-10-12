@@ -8,10 +8,12 @@
 #import "JRViewController.h"
 #import "JRFilterVC.h"
 
+#import "FSConnector.h"
+
 
 //@interface JRSearchResultsVC : JRViewController <UIActionSheetDelegate>
 
-@interface JRSearchResultsVC : JRViewController <UIActionSheetDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
+@interface JRSearchResultsVC : JRViewController <UIActionSheetDelegate,UICollectionViewDataSource,UICollectionViewDelegate,FSConnectorDelegate>
 - (instancetype)initWithSearchInfo:(id<JRSDKSearchInfo>)searchInfo
                           response:(id<JRSDKSearchResult>)response;
 

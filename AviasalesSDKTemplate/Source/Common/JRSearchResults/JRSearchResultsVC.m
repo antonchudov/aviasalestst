@@ -26,7 +26,9 @@
 #import "JRSearchResultsFlightSegmentCellLayoutParameters.h"
 #import "JRNewsFeedNativeAdView.h"
 
-#import "FSConnector.h"
+
+#import "FSCollectionViewCell.h"
+#import "FSVenueWebViewVC.h"
 
 static const NSInteger kJRAppodealAdIndex = 3;
 static const NSInteger kJRAviasalesAdIndex = 0;
@@ -57,7 +59,8 @@ static NSString *fullDirectionIATAStringForSearchInfo(id<JRSDKSearchInfo> search
     NSArray *_currencies;
     NSArray *_pickerCurrencies;
     
-    NSArray <NSDictionary *> * fsVenueItems;
+    NSArray <FSItem *> * fsVenueItems;
+    FSConnector *fsConnector;
 }
 
 - (instancetype)initWithSearchInfo:(id<JRSDKSearchInfo>)searchInfo response:(id<JRSDKSearchResult>)response {
@@ -87,6 +90,9 @@ static NSString *fullDirectionIATAStringForSearchInfo(id<JRSDKSearchInfo> search
         _tableManager = [[JRTableManagerUnion alloc] initWithFirstManager:_resultsList secondManager:_ads secondManagerPositions:[NSIndexSet indexSet]];
         
         fsVenueItems = [[NSArray alloc] init];//Anton Chudov
+        fsConnector = [[FSConnector alloc] init];
+        fsConnector.delegate = self;
+        
     }
     
     return self;
@@ -110,12 +116,18 @@ static NSString *fullDirectionIATAStringForSearchInfo(id<JRSDKSearchInfo> search
     
     [self updateTitle];
     [self updateCurrencyButton];
+    
+    self.fsCollectionView.delegate = self;
+    self.fsCollectionView.dataSource = self;
+    
+    [self.fsCollectionView registerNib:[UINib nibWithNibName:@"FSCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"cell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     self.emptyView.hidden = (self.filter.filteredTickets.count != 0);
+    [self requestFSData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -323,35 +335,85 @@ static NSString *fullDirectionIATAStringForSearchInfo(id<JRSDKSearchInfo> search
     [alert show];
 }
 
-@end
 
 
 //Chudov Anton -->
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+-(void) requestFSData{
+    NSMutableArray *places = [NSMutableArray array];
+    NSOrderedSet *segments = [self.searchInfo travelSegments];
+    for(int i=0;i<segments.count;i++){
+        id<JRSDKAirport> airport = [segments[i] destinationAirport];
+        double latitude = [[airport latitude] doubleValue];
+        double longitude = [[airport longitude] doubleValue];
+        FSCoordinate *coordinate = [[FSCoordinate alloc] initWithLatitude:latitude andLongitude:longitude];
+        
+        [places addObject:coordinate];
+    }
+    
+    [fsConnector requestDataForPlaces:places];
+}
+
+-(void)FSConnectorDidReciveData:(NSArray<FSItem *> *)data{
+    fsVenueItems = data;
+    [self.fsCollectionView reloadData];
+}
+
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView
-numberOfItemsInSection:(NSInteger)section{
-    return self.noteImages.count;
+     numberOfItemsInSection:(NSInteger)section{
+    return fsVenueItems.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
-cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"imageCell"forIndexPath: indexPath];
-    NSUInteger idx = indexPath.item;
-    RTTripImage *tripImage = self.noteImages[idx];
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    FSCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"cell"forIndexPath: indexPath];
+    FSItem *item = fsVenueItems[indexPath.item];
     
-    
-    
-    UIImage * image = [UIImage imageWithData:tripImage.imageData scale: 1.0];
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
-    [cell.contentView addSubview: imageView];
-    
-    
+    cell.groupLabel.text = item.categoryName;
+    cell.venueNameText.text = item.itemName;
+    NSData *imageData = item.imageData;
+    if(imageData!=nil){
+        UIImage* image = [UIImage imageWithData:item.imageData];
+        cell.iconImage.image = image;
+        [cell.iconImage sizeToFit];
+    }
     return cell;
     
 }
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    FSItem *item = fsVenueItems[indexPath.item];
+    if(item.venueUrl != nil){
+        FSVenueWebViewVC *const venueWebViewVC = [[FSVenueWebViewVC alloc] initWithNibName:@"FSVenueWebViewVC" bundle:AVIASALES_BUNDLE];
+        
+        venueWebViewVC.venueUrl = item.venueUrl;
+        
+        
+        UIBarButtonItem *const backButton = [[UIBarButtonItem alloc] initWithTitle:AVIASALES_(@"JR_BACK_TITLE") style:UIBarButtonItemStylePlain target:nil action:nil];
+        self.navigationItem.backBarButtonItem = backButton;
+        
+        if (iPhone()) {
+            [self.navigationController pushViewController:venueWebViewVC animated:YES];
+        } else {
+            JRScreenScene *const scene = [JRScreenSceneController screenSceneWithMainViewController:venueWebViewVC
+                                                                                              width:[JRScreenSceneController screenSceneControllerWideViewWidth]
+                                                                            accessoryViewController:nil
+                                                                                              width:kNilOptions
+                                                                                     exclusiveFocus:NO];
+            [self.sceneViewController pushScreenScene:scene animated:YES];
+        }
+    
+    }
+}
 //Chudov Anton <--
+
+
+
+@end
+
+
+
 
 
 static NSString *fullDirectionIATAStringForSearchInfo(id<JRSDKSearchInfo> searchInfo) {
