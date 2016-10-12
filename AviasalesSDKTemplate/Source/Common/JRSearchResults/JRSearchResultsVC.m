@@ -26,6 +26,8 @@
 #import "JRSearchResultsFlightSegmentCellLayoutParameters.h"
 #import "JRNewsFeedNativeAdView.h"
 
+#import "FSConnector.h"
+
 static const NSInteger kJRAppodealAdIndex = 3;
 static const NSInteger kJRAviasalesAdIndex = 0;
 static const CGFloat kJRBottomTableInset = 44;
@@ -54,6 +56,8 @@ static NSString *fullDirectionIATAStringForSearchInfo(id<JRSDKSearchInfo> search
 @implementation JRSearchResultsVC {
     NSArray *_currencies;
     NSArray *_pickerCurrencies;
+    
+    NSArray <NSDictionary *> * fsVenueItems;
 }
 
 - (instancetype)initWithSearchInfo:(id<JRSDKSearchInfo>)searchInfo response:(id<JRSDKSearchResult>)response {
@@ -81,6 +85,8 @@ static NSString *fullDirectionIATAStringForSearchInfo(id<JRSDKSearchInfo> search
         _ads = [[JRAdvertisementTableManager alloc] init];
 
         _tableManager = [[JRTableManagerUnion alloc] initWithFirstManager:_resultsList secondManager:_ads secondManagerPositions:[NSIndexSet indexSet]];
+        
+        fsVenueItems = [[NSArray alloc] init];//Anton Chudov
     }
     
     return self;
@@ -318,7 +324,35 @@ static NSString *fullDirectionIATAStringForSearchInfo(id<JRSDKSearchInfo> search
 }
 
 @end
+
+
+//Chudov Anton -->
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView
+numberOfItemsInSection:(NSInteger)section{
+    return self.noteImages.count;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"imageCell"forIndexPath: indexPath];
+    NSUInteger idx = indexPath.item;
+    RTTripImage *tripImage = self.noteImages[idx];
     
+    
+    
+    UIImage * image = [UIImage imageWithData:tripImage.imageData scale: 1.0];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
+    [cell.contentView addSubview: imageView];
+    
+    
+    return cell;
+    
+}
+//Chudov Anton <--
+
 
 static NSString *fullDirectionIATAStringForSearchInfo(id<JRSDKSearchInfo> searchInfo) {
     NSMutableString *directionString = [NSMutableString string];

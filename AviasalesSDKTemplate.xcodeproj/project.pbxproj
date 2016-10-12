@@ -218,6 +218,9 @@
 		C60EC83D17E848DA00C5D52E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C60EC83C17E848DA00C5D52E /* CoreGraphics.framework */; };
 		C60EC83F17E848DA00C5D52E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C60EC83E17E848DA00C5D52E /* UIKit.framework */; };
 		C67CC6FB17F31A55006C659C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C67CC6FA17F31A55006C659C /* CoreLocation.framework */; };
+		C974090C1DACE181004A0B89 /* FSConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = C974090B1DACE181004A0B89 /* FSConnector.m */; };
+		C97409181DAE25CE004A0B89 /* FSCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C97409161DAE25CE004A0B89 /* FSCollectionViewCell.m */; };
+		C97409191DAE25CE004A0B89 /* FSCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C97409171DAE25CE004A0B89 /* FSCollectionViewCell.xib */; };
 		CFA1072F530A2EBCC2C123A6 /* libPods-AviasalesSDKTemplateTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6512EB8E2138DCDDAF0D230 /* libPods-AviasalesSDKTemplateTests.a */; };
 /* End PBXBuildFile section */
 
@@ -597,6 +600,11 @@
 		C60EC83E17E848DA00C5D52E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C67CC6FA17F31A55006C659C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C6B751E018240B5400FEF5B9 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		C974090A1DACE181004A0B89 /* FSConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSConnector.h; sourceTree = "<group>"; };
+		C974090B1DACE181004A0B89 /* FSConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSConnector.m; sourceTree = "<group>"; };
+		C97409151DAE25CE004A0B89 /* FSCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCollectionViewCell.h; sourceTree = "<group>"; };
+		C97409161DAE25CE004A0B89 /* FSCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCollectionViewCell.m; sourceTree = "<group>"; };
+		C97409171DAE25CE004A0B89 /* FSCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSCollectionViewCell.xib; sourceTree = "<group>"; };
 		D857DB3BB9A6C7C0254EDC3C /* Pods-AviasalesSDKTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AviasalesSDKTemplate.release.xcconfig"; path = "Pods/Target Support Files/Pods-AviasalesSDKTemplate/Pods-AviasalesSDKTemplate.release.xcconfig"; sourceTree = "<group>"; };
 		D9E35EAEF225DD040D60E1D2 /* Pods-AviasalesSDKTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AviasalesSDKTemplate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AviasalesSDKTemplate/Pods-AviasalesSDKTemplate.debug.xcconfig"; sourceTree = "<group>"; };
 		E6512EB8E2138DCDDAF0D230 /* libPods-AviasalesSDKTemplateTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AviasalesSDKTemplateTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1347,6 +1355,7 @@
 		C580DAFF1CC52BAF009CA04B /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				C974090D1DAE2045004A0B89 /* FS */,
 				7CCC2E0D1D3D24660082FEFE /* JRSDKSearchInfoCoder.h */,
 				7CCC2E0E1D3D24660082FEFE /* JRSDKSearchInfoUrlCoder.h */,
 				7CCC2E0F1D3D24660082FEFE /* JRSDKSearchInfoUrlCoder.m */,
@@ -1591,6 +1600,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C974090D1DAE2045004A0B89 /* FS */ = {
+			isa = PBXGroup;
+			children = (
+				C974090A1DACE181004A0B89 /* FSConnector.h */,
+				C974090B1DACE181004A0B89 /* FSConnector.m */,
+				C97409151DAE25CE004A0B89 /* FSCollectionViewCell.h */,
+				C97409161DAE25CE004A0B89 /* FSCollectionViewCell.m */,
+				C97409171DAE25CE004A0B89 /* FSCollectionViewCell.xib */,
+			);
+			name = FS;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1650,7 +1671,6 @@
 						TestTargetID = C60EC83617E848DA00C5D52E;
 					};
 					C60EC83617E848DA00C5D52E = {
-						DevelopmentTeam = C92M3ZV55X;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1731,6 +1751,7 @@
 				C580DB6E1CC52D6E009CA04B /* JRSearchFormDateCell.xib in Resources */,
 				072CCA8B1CAABE73003A8834 /* App.xcassets in Resources */,
 				C580DB9D1CC52DB1009CA04B /* JRSearchFormTravelClassPickerVC.xib in Resources */,
+				C97409191DAE25CE004A0B89 /* FSCollectionViewCell.xib in Resources */,
 				C580DB881CC52D89009CA04B /* JRSearchFormPassengerPickerView.xib in Resources */,
 				7CE545EE1D11BC340040065D /* JRFlightCell.xib in Resources */,
 				7C35F1651D1A972C00B9CB09 /* JRFilterListSeparatorCell.xib in Resources */,
@@ -1942,6 +1963,7 @@
 				C56173431CC627F60049E2EE /* JRDefines.m in Sources */,
 				7CCC2E011D3D1E350082FEFE /* JRNativeAdLoader.m in Sources */,
 				3A115BAF1D01CDE000D94FAE /* JRAirportPickerItem.m in Sources */,
+				C974090C1DACE181004A0B89 /* FSConnector.m in Sources */,
 				7CDA75B31D143FE90069FDD8 /* JRBrowserVC.m in Sources */,
 				7CE1F2E81D3638E200363B1A /* JRPriceUtils.m in Sources */,
 				C56173BC1CC65FB80049E2EE /* JRSearchInfoUtils.m in Sources */,
@@ -1983,6 +2005,7 @@
 				7CCC2DAD1D3D032E0082FEFE /* JRSearchResultsVC.m in Sources */,
 				7C35F1591D1A972C00B9CB09 /* JRFilterTicketBounds.m in Sources */,
 				7C35F1601D1A972C00B9CB09 /* JRFilterCheckboxCell.m in Sources */,
+				C97409181DAE25CE004A0B89 /* FSCollectionViewCell.m in Sources */,
 				3A7516DE1D2E8D6300BC97BE /* JRAirport+LocalizedName.m in Sources */,
 				C56173811CC648CC0049E2EE /* JRViewController+JRScreenScene.m in Sources */,
 				C561732D1CC52F910049E2EE /* JRFPPopoverController.m in Sources */,
@@ -2160,7 +2183,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = C92M3ZV55X;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2223,7 +2246,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = C92M3ZV55X;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

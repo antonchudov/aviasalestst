@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="FSCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="250" height="150"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="250" height="150"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="efn-4z-9ds">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="36" id="MwM-N9-YpQ"/>
+                            <constraint firstAttribute="height" constant="36" id="aIK-Cl-rNJ"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCS-NJ-bbL">
+                        <frame key="frameInset" minX="52" minY="8" width="190" height="26"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDO-fD-7ZO">
+                        <frame key="frameInset" minX="8" minY="46" width="234" height="96"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="efn-4z-9ds" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Af9-Ap-v5S"/>
+                <constraint firstAttribute="trailing" secondItem="xCS-NJ-bbL" secondAttribute="trailing" constant="8" id="BX5-t3-EHh"/>
+                <constraint firstItem="XDO-fD-7ZO" firstAttribute="top" secondItem="efn-4z-9ds" secondAttribute="bottom" constant="8" id="JVy-4W-b1T"/>
+                <constraint firstItem="XDO-fD-7ZO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="PVQ-cw-au2"/>
+                <constraint firstAttribute="bottom" secondItem="XDO-fD-7ZO" secondAttribute="bottom" constant="8" id="SUW-Kt-vr2"/>
+                <constraint firstItem="efn-4z-9ds" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="V09-bG-yK1"/>
+                <constraint firstItem="xCS-NJ-bbL" firstAttribute="leading" secondItem="efn-4z-9ds" secondAttribute="trailing" constant="8" id="cm1-on-UFX"/>
+                <constraint firstItem="xCS-NJ-bbL" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="ebR-Qa-qrf"/>
+                <constraint firstAttribute="trailing" secondItem="XDO-fD-7ZO" secondAttribute="trailing" constant="8" id="haE-Io-kEn"/>
+            </constraints>
+            <connections>
+                <outlet property="groupLabel" destination="xCS-NJ-bbL" id="P19-cK-e3B"/>
+                <outlet property="iconImage" destination="efn-4z-9ds" id="Fut-i5-ozQ"/>
+                <outlet property="venueNameText" destination="XDO-fD-7ZO" id="2FR-q7-Z7b"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -12,9 +12,9 @@
 #import "JRNavigationController.h"
 
 // Set your api token, marker and appodeal api key here
-static NSString *const kJRAPIToken = @"<your api token here>";
-static NSString *const kJRPartnerMarker = @"<your partner marker here>";
-static NSString *const kAppodealApiKey = @"<your appodeal api key here>"; //More about appodeal here: http://appodeal.com
+static NSString *const kJRAPIToken = @"aaa367d3bc5c2f0121da487e8dae9d48";
+static NSString *const kJRPartnerMarker = @"22427";
+static NSString *const kAppodealApiKey = @""; //More about appodeal here: http://appodeal.com
 
 @implementation JRAppDelegate
 
@@ -22,7 +22,7 @@ static NSString *const kAppodealApiKey = @"<your appodeal api key here>"; //More
 {
     [JRAppLauncher startServicesWithAPIToken:kJRAPIToken
                                partnerMarker:kJRPartnerMarker
-                              appodealAPIKey:kAppodealApiKey];
+                              appodealAPIKey:nil];
     
     // Screen initializing
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

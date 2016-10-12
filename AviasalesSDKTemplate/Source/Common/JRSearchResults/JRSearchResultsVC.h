@@ -9,8 +9,9 @@
 #import "JRFilterVC.h"
 
 
-@interface JRSearchResultsVC : JRViewController <UIActionSheetDelegate>
+//@interface JRSearchResultsVC : JRViewController <UIActionSheetDelegate>
 
+@interface JRSearchResultsVC : JRViewController <UIActionSheetDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 - (instancetype)initWithSearchInfo:(id<JRSDKSearchInfo>)searchInfo
                           response:(id<JRSDKSearchResult>)response;
 
@@ -25,5 +26,9 @@
 @property (nonatomic, weak) IBOutlet UILabel *emptyLabel;
 
 @property (strong, nonatomic, readonly) JRFilter *filter;
+@property (weak, nonatomic) IBOutlet UICollectionView *fsCollectionView;
+
+
+
 
 @end
